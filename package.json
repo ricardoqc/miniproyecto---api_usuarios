@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "name": "mini_proyecto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mysql2": "^3.9.4",
+    "nodemon": "^3.1.0",
+    "standard": "^17.1.0"
+  }
+}
