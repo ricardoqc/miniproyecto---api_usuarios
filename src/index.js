@@ -32,11 +32,11 @@ const server = http.createServer((req, res) => {
     const filePath = path.join(__dirname, '..', 'public_html', 'styles.css');
     fs.readFile(filePath, (err, content) => {
       if (err) {
-        console.error('Error reading file:', err); // Good to log error for debugging
+        console.error('Error reading file:', err);
         res.writeHead(404);
         res.end('Archivo no encontrado');
       } else {
-        res.writeHead(200, { 'Content-Type': 'text/css' }); // Directly setting the content type
+        res.writeHead(200, { 'Content-Type': 'text/css' });
         res.end(content);
       }
     });
