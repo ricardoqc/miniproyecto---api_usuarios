@@ -1,5 +1,11 @@
 import http from 'http';
-import { getUsers, exportToCSV, importFromCSV } from './controller.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { getUsers, exportToCSV, importFromCSV } from '../src/controller.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const server = http.createServer((req, res) => {
   res.json = (data) => {
@@ -12,11 +18,43 @@ const server = http.createServer((req, res) => {
     return res;
   };
 
-  if (req.url === '/api/users' && req.method === 'GET') {
+  if (req.url === '/' && req.method === 'GET') {
+    fs.readFile(path.join(__dirname, '..', 'public_html', 'index.html'), (err, content) => {
+      if (err) {
+        res.writeHead(500);
+        res.end('Error al cargar el archivo');
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(content);
+      }
+    });
+  } else if (req.url === '/styles.css') {
+    const filePath = path.join(__dirname, '..', 'public_html', 'styles.css');
+    fs.readFile(filePath, (err, content) => {
+      if (err) {
+        console.error('Error reading file:', err); // Good to log error for debugging
+        res.writeHead(404);
+        res.end('Archivo no encontrado');
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/css' }); // Directly setting the content type
+        res.end(content);
+      }
+    });
+  } else if (req.url === '/api/users' && req.method === 'GET') {
     getUsers(req, res);
   } else if (req.url === '/api/users/export' && req.method === 'GET') {
     exportToCSV(req, res);
-  } else if (req.url === '/api/users/import' && req.method === 'POST') {
+  } else if (req.url === '/import.html' && req.method === 'GET') {
+    fs.readFile(path.join(__dirname, '..', 'public_html', 'import.html'), (err, content) => {
+      if (err) {
+        console.error('Error leendo archivo:', err);
+        res.writeHead(500);
+        res.end('Error al cargar archivo');
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(content);
+      }
+    });
     importFromCSV(req, res);
   } else {
     res.status(404).json({ error: 'Endpoint no encontrado' });
