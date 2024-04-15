@@ -1,24 +1,56 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-    background-color: #f4f4f4;
+* {
+    margin: 0;
+    padding: 0;
+    background-color: blueviolet;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    width: 900px;
+    height: 500px;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin: 50px auto;
+    padding: 50px;
+}
+
+h1, p, li {
+    font-family: 'Poopins', sans-serif;
 }
 
 h1 {
-    color: #333;
+    font-weight: 900;
+    font-size: 42px;
+    color: #fff;
 }
 
-form {
-    margin-top: 20px;
+p {
+    font-size: 20px;
+    font-weight: lighter;
+    color: #fff;
 }
 
-input, button {
+.nombre {
+    width: 200px;
+    text-align: center;
+    background-color: beige;
     padding: 10px;
-    margin-top: 10px;
+    border-radius: 10px;
+    color: #1f1f1f;
+    font-weight: 600;
 }
 
-a {
-    display: inline-block;
-    margin-top: 20px;
+ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    font-size: 18px;
+    li a {
+        color: aquamarine;
+    }
 }
+
